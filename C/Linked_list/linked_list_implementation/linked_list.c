@@ -15,7 +15,7 @@ struct Node
 
 void display_list(struct Node* base)
 {
-    while(base -> next != NULL)
+    while(base != NULL)
     {
         int val = base -> value;
         printf("%d -> ", val);
@@ -71,7 +71,7 @@ int main()
         printf("\n\n");
 
     }
-
+    printf("End of list reached.");
 
     return 0;
 }
