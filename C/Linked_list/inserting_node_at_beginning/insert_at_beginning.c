@@ -38,7 +38,7 @@ void free_memory(struct Node* top)
         struct Node* temp;
         temp = top->next;
         printf("\nFreeing memory at: %p", (void*)top);
-        free(top);
+        free(top); // frees the allocated block of memory pointed by the pointer.
         top= temp;
     }
     printf("\nRemoved all allocated memory.");
