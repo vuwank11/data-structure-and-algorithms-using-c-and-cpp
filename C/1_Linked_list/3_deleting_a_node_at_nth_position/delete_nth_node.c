@@ -16,6 +16,7 @@ struct Node
 
 void display_list(struct Node* base)
 {
+    printf("\nThe updated list is:\n");
     while(base != NULL)
     {
         int val = base -> value;
@@ -49,8 +50,48 @@ void insert_node(struct Node* top, struct Node* node)
     {
         pointer = pointer -> next;
     }
-    pointer -> next = node;
-        
+    pointer -> next = node;     
+}
+
+struct Node* delete_node(struct Node* top, int total_node)
+{
+    int pos;
+    printf("\nEnter the position of element that you want to delete:");
+    scanf("%d", &pos);
+
+    if (pos==1)
+    {
+        struct Node* temp_head = top;
+        top = top->next;
+        free(temp_head);
+        return top;
+    }
+    else if (pos >= total_node)
+    {   
+        struct Node* temp_head = top;
+        while(1)
+        {
+            if (top->next == NULL)
+            {
+                break;
+            }
+            else
+            {
+            top = top -> next;
+            }
+        }
+        free(top);
+        return temp_head; 
+    }
+    else if(1<=pos<= total_node)
+    {
+        return top;
+    }
+    else
+    {
+        printf("Invalid Input!!!");
+        return top;
+    }
 }
 
 
@@ -89,7 +130,7 @@ int main()
             insert_node(head, temp);   
         }
         
-        printf("\nThe updated list is:\n");
+        
         display_list(head);
         printf("\n\n");
 
@@ -98,15 +139,28 @@ int main()
 
     while(1)
     {   
-        string ans;
-        printf("\nDo you want to delete an elements(y/n):");
-        scanf("%c", &ans);
+        char ans;
 
-        if(ans=="y"||ans=="Y")
+        printf("\nDo you want to delete an elements(y/n): ");
+        scanf(" %c", &ans); // The whitespace at the start accounts for the whitespace characters that may be remaining inthe input buffer.
+        printf("You choose: %c", ans);
+
+        if(ans=='y'||ans=='Y')
         {
-            continue;
+            head = delete_node(head, n);
+            n-- ;
+            if (n==0)
+            {
+                printf("The List is empty. No more elements left.\n");
+                break;
+            }
+            else
+            {
+                display_list(head);
+                printf("\n\n");
+            }
         }
-        else if(ans=="n"||ans =="N")
+        else if(ans=='n'||ans =='N')
         {
             break;
         }
