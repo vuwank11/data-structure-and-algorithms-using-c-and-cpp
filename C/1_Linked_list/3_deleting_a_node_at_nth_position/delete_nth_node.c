@@ -8,6 +8,8 @@
 # include<stdlib.h>
 #include<string.h>
 
+int NUM =0;
+
 struct Node
 {
     int value; // data field of node.
@@ -59,39 +61,41 @@ struct Node* delete_node(struct Node* top, int total_node)
     printf("\nEnter the position of element that you want to delete:");
     scanf("%d", &pos);
 
-    if (pos==1)
+    if (pos==1 || total_node==1)
     {
         struct Node* temp_head = top;
         top = top->next;
         free(temp_head);
+        NUM--;
         return top;
     }
-    else if (pos >= total_node)
+    else if (pos >= 1)
     {   
-        struct Node* temp_head = top;
-        while(1)
+        if(pos> total_node)
         {
-            if (top->next == NULL)
-            {
-                break;
-            }
-            else
-            {
-            top = top -> next;
-            }
+            pos = total_node;
         }
-        free(top);
-        return temp_head; 
+        struct Node* temp_head = top;
+
+        for(int i=1; i <= pos-2; i++)
+        {
+            temp_head = temp_head->next;
+        }
+
+        struct Node* node = temp_head->next;
+        temp_head->next = node -> next;
+
+        free(node);
+        NUM--;
+        
     }
-    else if(1<=pos<= total_node)
-    {
-        return top;
-    }
+
     else
     {
         printf("Invalid Input!!!");
-        return top;
+       
     }
+    return top;
 }
 
 
@@ -101,13 +105,13 @@ int main()
     head = NULL;
 
     // Get the number of elements in the list.
-    int n;
+    // int n;
     printf("Enter the number of elements:");
-    scanf("%d", &n);
-    printf("Initializing a linked list for %d elements.\n", n);
+    scanf("%d", &NUM);
+    printf("Initializing a linked list for %d elements.\n", NUM);
 
     /* Loop to insert elements in the linked list.*/
-    for(int i=0; i<n; i++)
+    for(int i=0; i<NUM; i++)
     {
         struct Node* temp;
         temp = (struct Node*) malloc(sizeof(struct Node));
@@ -147,9 +151,9 @@ int main()
 
         if(ans=='y'||ans=='Y')
         {
-            head = delete_node(head, n);
-            n-- ;
-            if (n==0)
+            head = delete_node(head, NUM);
+            // NUM-- ;
+            if (NUM==0)
             {
                 printf("The List is empty. No more elements left.\n");
                 break;
