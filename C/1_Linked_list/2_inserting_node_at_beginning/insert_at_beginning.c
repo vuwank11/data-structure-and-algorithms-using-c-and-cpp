@@ -13,14 +13,14 @@ struct Node
     struct Node* next;
 };
 
-void display_list(struct Node* base)
+void display_list(struct Node* base_node)
 {
     
-    while(base != NULL)
+    while(base_node != NULL)
     {
-        int val = base -> value;
+        int val = base_node -> value;
         printf("%d -> ", val);
-        base = base -> next;
+        base_node = base_node -> next;
     }
 }
 
@@ -56,16 +56,16 @@ int main()
     scanf("%d", &n);
     printf("Initializing a linked list for %d elements.\n", n);
 
-    for(int i=0; i<n; i++)
+    for(int i=1; i<=n; i++)
     {
         struct Node* temp;
         temp = (struct Node*) malloc(sizeof(struct Node));
-        // printf("\n%p", (void *)temp); to see the adresses of created nodes.
+        // printf("\n%p", (void *)temp); to see the addresses of created nodes.
 
         printf("New node created at address: %p", (void *)temp);
 
         int data;
-        printf("\nEnter the value of %dth element:", i+1);
+        printf("\nEnter the value of %dth element:", i);
         scanf("%d", &data);
         temp->value = data;
         temp -> next = NULL;

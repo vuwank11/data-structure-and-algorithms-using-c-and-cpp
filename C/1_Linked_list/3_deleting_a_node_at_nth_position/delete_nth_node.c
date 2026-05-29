@@ -93,7 +93,6 @@ struct Node* delete_node(struct Node* top, int total_node)
     else
     {
         printf("Invalid Input!!!");
-       
     }
     return top;
 }
